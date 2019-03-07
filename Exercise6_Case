@@ -1,0 +1,28 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity mux_8to1_case is
+port(data_in: in std_logic_vector(7 downto 0);
+sel: in std_logic_vector(2 downto 0);
+output: out std_logic);
+end mux_8to1_case;
+
+architecture Behavioral of mux_8to1_case is
+begin
+
+process (sel,data_in)
+begin
+case (sel) is
+when "111" => output <= data_in(7);
+when "110" => output <= data_in(6);
+when "101" => output <= data_in(5);
+when "100" => output <= data_in(4);
+when "011" => output <= data_in(3);
+when "010" => output <= data_in(2);
+when "001" => output <= data_in(1);
+when "000" => output <= data_in(0);
+when others => output <= '0';
+end case;
+end process;
+
+end Behavioral;
