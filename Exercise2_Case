@@ -1,0 +1,39 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity exercise2case is
+port(A_1, A_2, B_1, B_2, D_1: in std_logic;
+E_out: out std_logic);
+end exercise2case;
+
+architecture Behavioral of exercise2case is
+signal sel1, sel2, sel3: std_logic_vector(1 downto 0);
+signal E_out1, E_out2, E_out3: std_logic;
+
+begin
+
+sel1 <= A_1 & A_2;
+sel2 <= B_1 & B_2;
+sel3 <= B_2 & (NOT(D_1));
+
+process(sel1,sel2,sel3)
+begin
+case(sel1) is
+when "11" => E_out1 <= '1';
+when others => E_out1 <= '0';
+end case;
+
+case(sel2) is
+when "00" => E_out2 <= '0';
+when others => E_out2 <= '1';
+end case;
+
+case(sel3) is
+when "11" => E_out3 <= '1';
+when others => E_out3 <= '0';
+end case;
+
+E_out <= E_out1 OR E_out2 OR E_out3;
+end process;
+
+end Behavioral;
